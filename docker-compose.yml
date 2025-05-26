@@ -1,0 +1,38 @@
+# Este arquivo define os serviços Docker necessários para o projeto ETL B3 Portfolio.
+# Ele configura:
+#   - O SQL Server para armazenamento dos dados
+#   - O Apache Airflow para orquestração dos pipelines ETL
+
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_etl_b3
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Mentira2025!
+      - MSSQL_PID=Developer
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    restart: always
+
+  airflow:
+    image: apache/airflow:2.9.0
+    container_name: airflow_etl_b3
+    ports:
+      - "8080:8080"
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:///airflow.db
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    restart: always
+    command: standalone
+
+volumes:
+  sqlserver-data:
