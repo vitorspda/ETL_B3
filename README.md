@@ -19,8 +19,11 @@ O principal objetivo deste projeto é aplicar meus conhecimentos de Engenharia d
 etl-b3-portfolio/
 │
 ├── dags/ # Pipelines do Airflow
+|
 ├── notebooks/ # Notebooks para análises exploratórias
+|
 ├── scripts/ # Scripts Python para ETL (extração, transformação, carga)
+|
 ├── sql/ # Scripts SQL para criação e manutenção das tabelas no banco
 ├── README.md # Documentação do projeto
 ├── requirements.txt # Lista de dependências Python
