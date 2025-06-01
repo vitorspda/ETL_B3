@@ -1,0 +1,9 @@
+USE ETL_B3;
+
+GO
+
+CREATE TABLE Ativos (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    ticker VARCHAR(10) NOT NULL,
+    nome VARCHAR(100) NOT NULL
+);
