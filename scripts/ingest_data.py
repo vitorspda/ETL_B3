@@ -5,10 +5,13 @@ from datetime import datetime
 
 def extract_data(tickers, start_date, end_date):
     all_data = []
-
+    
+    # transforma cada ticker(nome da empresa e data) em uma lista
     for ticker in tickers:
         data = yf.download(ticker, start=start_date, end=end_date, auto_adjust=False)
-        
+
+    # Resetamos o index e fixamos a coluna Ticker para trazer corretamente o ticker e as colunas
+    # e faz um append dos dados na lista 
         if not data.empty:
             data.reset_index(inplace=True)
             data['Ticker'] = ticker
